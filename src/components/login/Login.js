@@ -5,11 +5,14 @@ import {useHistory} from 'react-router-dom'
 function Login() {
     const history=useHistory()
     const [state]=useDataLayer()
-    useEffect(() => {
-        if(state.isLoggedIn){
-            history.replace("/")
-        }
-        
+    useEffect( () => {
+        (async ()=>{
+
+            if(state.isLoggedIn){
+              await history.replace("/")
+            }
+            
+        })()
     },[state.isLoggedIn])
     const signInHandler=async (e)=>{
     await auth.signInWithPopup(googleProvider)
