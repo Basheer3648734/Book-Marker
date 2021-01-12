@@ -1,5 +1,5 @@
-import {ADD_USER,ADD_BOOK,EDIT_BOOK,REMOVE_USER,REMOVE_BOOK} from './actionType'
-import {addUser,removeUser,addBook,removeBook,editBook} from './helper'
+import {ADD_USER,ADD_BOOK,EDIT_BOOK,REMOVE_USER,REMOVE_BOOK, ADD_FETCHED_BOOKS} from './actionType'
+import {addUser,removeUser,addBook,removeBook,editBook,addFetchedBooks} from './helper'
 export const initialState={
     user:{},
     isLoggedIn:false,
@@ -21,6 +21,8 @@ export const reducer=(state,action)=>{
                 return editBook(state,action)
             case REMOVE_BOOK:
                 return removeBook(state,action)
+            case ADD_FETCHED_BOOKS:
+                return addFetchedBooks(state,action)
             default:
                 return state
         }

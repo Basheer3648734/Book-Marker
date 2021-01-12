@@ -1,5 +1,5 @@
-// import {firestore} from '../firebase'
-// import firebase from 'firebase'
+import {firestore} from '../firebase'
+import firebase from 'firebase'
 // import {v4 as uuiv4} from 'uuid'
 export const addUser=(state,action)=>{
     return {
@@ -19,10 +19,10 @@ export const removeUser=(state,action)=>{
 }
 
 export const addBook=(state,action)=>{
-// const data=action.payload
-// data['createdBy']=
-console.log(state.user)
-//   await firestore.collection("books").doc(uuiv4()).set(data)
+
+(async ()=>{
+   await firestore.collection("books").doc(state.user.uid).update({"books":firebase.firestore.FieldValue.arrayUnion({...action.payload})})
+})()
  return {
         ...state,
         books:[...state.books,action.payload]
@@ -30,21 +30,36 @@ console.log(state.user)
 }
 
 export const editBook=(state,action)=>{
-    const bookIndex=state.books.findIndex(b=>b.title===action.id)
-    const books=[...state.books]
-    books.splice(bookIndex,1,action.payload)
+(async ()=>{
+await removeBook(state,action)
+await addBook(state,action)
+})()
     return {
         ...state,
-        books
     }
 }
 
 export const removeBook=(state,action)=>{
-    // firestore.collection("users").doc(state.user.uid).add({books:firebase.firestore.FieldValue.arrayRemove({title:action.id})})
-    const books=state.books.filter(b=>b.title!==action.id)
+    const temp=async ()=>{
+try{
+    const t=state.books.find(b=>b.id===action.id);
+        await firestore.collection("books").doc(state.user.uid).update({"books":firebase.firestore.FieldValue.arrayRemove(t)})
+      
+    }
+        catch(e){
+            console.error(e)
+        }
+    }
+    temp()
     return {
-        ...state,
-        books
+        ...state
     }
 }
 
+export const addFetchedBooks=(state,action)=>{
+  
+    return {
+        ...state,
+        books:[...action.payload]
+    }
+}

@@ -9,7 +9,7 @@ function Login() {
         (async ()=>{
 
             if(state.isLoggedIn){
-              await history.replace("/")
+            return await history.replace("/")
             }
             
         })()

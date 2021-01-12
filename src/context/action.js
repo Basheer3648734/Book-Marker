@@ -1,5 +1,10 @@
-import {ADD_USER,ADD_BOOK,EDIT_BOOK,REMOVE_USER,REMOVE_BOOK} from './actionType'
-
+import {ADD_USER,ADD_BOOK,EDIT_BOOK,REMOVE_USER,REMOVE_BOOK,ADD_FETCHED_BOOKS} from './actionType'
+export function addFetchedBooks(payload){
+    return {
+        type:ADD_FETCHED_BOOKS,
+        payload
+    }
+}
 export function addUser(payload){
     return {
         type:ADD_USER,
@@ -8,6 +13,7 @@ export function addUser(payload){
 }
 
 export function addBook(payload){
+  
     return {
         type:ADD_BOOK,
         payload

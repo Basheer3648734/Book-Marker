@@ -5,7 +5,7 @@ import Modal from '../Modal/Modal'
 function EditForm({id,hideForm}) {
     
 const [state,dispatch]=useDataLayer()
-const book=state.books.find(b=>b.title===id)
+const book=state.books.find(b=>b.id===id)
 const [title,setTitle]=useState(book.title)
 const [author,setAuthor]=useState(book.author)
 const [imageURL,setImageURL]=useState(book.imageURL)
@@ -18,14 +18,12 @@ const onSubmitHandler=(e)=>{
     return setError("The fields cannot be empty")
     if(+totalPages===0){
         return setError("Total Pages cannot be 0.")
-
     }
-    const newBook={title:title.trim(),author:author.trim(),imageURL:imageURL.trim(),lastRead:(+lastRead),totalPages:(+totalPages)}
+    const newBook={id:id,title:title.trim(),author:author.trim(),imageURL:imageURL.trim(),lastRead:(+lastRead),totalPages:(+totalPages)}
     dispatch(editBook(id,newBook))
    hideForm()
 }
     return (
-
   <Modal>
       <div className="dark:bg-gray-800 z-50 pointer-events-auto bg-white w-full md:w-10/12 text-gray-900 absolute top-1/4 md:left-14 opacity-100 p-5">
         <h1 className="font-bold text-center text-xl mb-2 dark:text-gray-100">Edit Form</h1>
@@ -48,12 +46,10 @@ const onSubmitHandler=(e)=>{
      <input type="number" id="totalPages" required  value={totalPages} onChange={e=>setTotalPages(e.target.value)} className="dark:bg-gray-700 dark:border-0 dark:text-gray-200 border rounded-sm border-gray-900 border-solid w-7/12 px-2"/>
  </div>
  <div className="py-2 flex justify-between">
- 
      <label htmlFor="lastRead" className="dark:text-gray-100 font-medium text-md md:text-lg text-gray-700">Last Read</label>
      <input type="number" id="Last Read" required value={lastRead} onChange={e=>setLastRead(e.target.value)} className="dark:bg-gray-700 dark:border-0 dark:text-gray-200 border rounded-sm border-gray-900 border-solid w-7/12 px-2"/>
-    
  </div>
- <div >
+ <div>
 <button onClick={hideForm} type="button" className="dark:border-red-400 dark:text-red-400 float-right border border-red-700 text-red-700 md:w-2/12 w-3/12 text-sm  mx- p-2 text-white rounded-sm mt-4">Cancel</button>
  <button type="submit" className="float-right bg-blue-700 md:w-2/12 w-3/12 text-sm  mx-5 p-2 text-white rounded-sm mt-4 border boder-transparent">Submit</button>
  </div>

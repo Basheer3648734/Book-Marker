@@ -4,28 +4,45 @@ import {useHistory} from 'react-router-dom'
 import Form from '../Form/form'
 import List from '../List/List' 
 import Modal from '../Modal/Modal'
+import {firestore} from '../../firebase'
+import {addFetchedBooks} from '../../context/action'
 function Home() {
     const history=useHistory()
-    const [state]=useDataLayer()
+    let [state,dispatch]=useDataLayer()
     const [showAddForm,setShowAddForm]=useState(false)
     useEffect(  () => {
        (async ()=>{
         if(!state.isLoggedIn){
-            await history.replace("/login")
+           return history.replace("/login")
          }
        })()
-       
+      
         // return unsubscribe;
       }, [state.isLoggedIn])
+useEffect(() => {
+    if(state.isLoggedIn){
+       
+        firestore.collection("books").doc(state.user.uid).onSnapshot(snapShot=>{
+            if(snapShot.data()!==undefined){
+         const books=snapShot.data().books;
+         dispatch(addFetchedBooks(books))
+         }
+        })
+           }
+           return ()=>{
+               dispatch(addFetchedBooks([]))//needed to be corrected
+           }
+}, [])
+ 
     return (
         <div className="container z-0 w-11/12 md:w-10/12 lg:w-8/12 mx-auto text-gray-900 font-serif dark:text-gray-100">
             <div className="mt-5">
         <h1 className="font-bold text-3xl text-center mb-3">Books</h1>
         <ul>
             {state.books.length===0?<p className="text-lg py-2 text-gray-500 text-center">No books added!</p>:null}
-            {state.books.map(({title,author,imageURL,lastRead,totalPages})=>{
+            {state.books.map(({id,title,author,imageURL,lastRead,totalPages})=>{
                 return (
-                    <List key={title} title={title} author={author} imageURL={imageURL} lastRead={lastRead} completedPercentage={((lastRead/totalPages)*100).toFixed(0)}/>
+                    <List key={id} id={id} title={title} author={author} imageURL={imageURL} lastRead={lastRead} completedPercentage={((lastRead/totalPages)*100).toFixed(0)}/>
                 )
             })}
         </ul>

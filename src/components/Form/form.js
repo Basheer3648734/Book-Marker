@@ -25,7 +25,7 @@ const Form = ({setShowAddForm  }) => {
         }
         if (window.matchMedia('(max-device-width: 768px)').matches) 
         setShowAddForm()
-        dispatch(addBook({ title: title.trim(), author: author.trim(), imageURL: imageURL.trim(), lastRead: (+lastRead), totalPages: (+totalPages) }))
+        dispatch(addBook({id:uuidv4(), title: title.trim(), author: author.trim(), imageURL: imageURL.trim(), lastRead: (+lastRead), totalPages: (+totalPages) }))
         setTitle("")
         setAuthor("")
         setImageURL("")
