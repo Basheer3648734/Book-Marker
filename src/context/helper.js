@@ -125,28 +125,16 @@ export const removeAllBook = (state, action) => {
 export const deleteUserData = (state, action) => {
     (async()=>{
         try{
-            await auth.signOut()
-        await firestore.collection("books").doc(state.user.uid).delete().catch(e=>{
-            return {
-                ...state,
-                error:e.message
-            }
-        })
-        const storageExist=await storage.ref().child(`images/userProfile/${state.user.uid}`).listAll()
-        
-        if(storageExist && storageExist.items.length!==0)
+            const storageExist=await storage.ref().child(`images/userProfile/${state.user.uid}`).listAll();
+        await firestore.collection("books").doc(state.user.uid).delete()
+        if(storageExist && storageExist.items && storageExist.items.length!==0)
         await storage.ref().child(`images/userProfile/${state.user.uid}`).delete().catch(e=>{
             return {
                 ...state,
                 error:e.message
             }
         })
-        await auth.currentUser.delete().catch(e=>{
-            return {
-                ...state,
-                error:e.message
-            }
-        })
+        await auth.currentUser.delete()
 
     }catch(e){
         return {
