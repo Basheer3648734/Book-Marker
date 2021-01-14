@@ -1,0 +1,30 @@
+.loadingAnimation {
+  background: blue;
+  height: 2px;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  animation: loading 2s infinite;
+}
+
+@keyframes loading {
+  0% {
+    width: 0px;
+  }
+  25% {
+    width: 40%;
+    left: 20%;
+  }
+  50% {
+    width: 50%;
+    left: 30%;
+  }
+  75% {
+    width: 95%;
+    left: 82%;
+  }
+  100% {
+    width: 100%;
+    left: 125%;
+  }
+}

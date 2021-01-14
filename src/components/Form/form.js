@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDataLayer } from '../../context/context'
-import { addBook } from '../../context/action'
+import { addBook, loading } from '../../context/action'
 import {v4 as uuidv4} from 'uuid'
 const Form = ({setShowAddForm  }) => {
     const [title, setTitle] = useState("")
@@ -14,6 +14,7 @@ const Form = ({setShowAddForm  }) => {
 
     const onSubmitHandler = (e) => {
         e.preventDefault()
+        dispatch(loading(true))
         if (title.length === 0 || author.length === 0)
             return setError("The fields cannot be empty")
         if (state.books.includes(book => book.title.toLowerCase() === title.toLowerCase()) || state.books.includes(book => book.author.toLowerCase() === author.toLowerCase())) {
@@ -25,7 +26,7 @@ const Form = ({setShowAddForm  }) => {
         }
         if (window.matchMedia('(max-device-width: 768px)').matches) 
         setShowAddForm()
-        dispatch(addBook({id:uuidv4(), title: title.trim(), author: author.trim(), imageURL: imageURL.trim(), lastRead: (+lastRead), totalPages: (+totalPages) }))
+        dispatch(addBook({id:uuidv4(), title: title.trim(), author: author.trim(), imageURL: imageURL.trim(), lastRead: (+lastRead), totalPages: (+totalPages),completed: +totalPages=== +lastRead  }))
         setTitle("")
         setAuthor("")
         setImageURL("")

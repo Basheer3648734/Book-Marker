@@ -1,9 +1,11 @@
-import {ADD_USER,ADD_BOOK,EDIT_BOOK,REMOVE_USER,REMOVE_BOOK, ADD_FETCHED_BOOKS} from './actionType'
-import {addUser,removeUser,addBook,removeBook,editBook,addFetchedBooks} from './helper'
+import {ERROR,LOADING,ADD_USER,ADD_BOOK,EDIT_BOOK,REMOVE_USER,REMOVE_BOOK, ADD_FETCHED_BOOKS,REMOVE_ALL_BOOK,DELETE_USER_PERMANENTLY} from './actionType'
+import {changeError,setLoading,addUser,removeUser,addBook,removeBook,editBook,addFetchedBooks,removeAllBook,deleteUserData} from './helper'
 export const initialState={
     user:{},
     isLoggedIn:false,
-    books:[]
+    books:[],
+    loading:false,
+    error:null
     }
 /*
 user structure=> displayName, email, userId, photoURL
@@ -23,6 +25,14 @@ export const reducer=(state,action)=>{
                 return removeBook(state,action)
             case ADD_FETCHED_BOOKS:
                 return addFetchedBooks(state,action)
+            case REMOVE_ALL_BOOK:
+                return removeAllBook(state,action)
+            case DELETE_USER_PERMANENTLY:
+                return deleteUserData(state,action)
+            case LOADING:
+                return setLoading(state,action);
+            case ERROR:
+                return changeError(state,action)
             default:
                 return state
         }

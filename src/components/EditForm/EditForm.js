@@ -1,6 +1,6 @@
 import React,{useState} from 'react'
 import {useDataLayer} from '../../context/context'
-import {editBook} from '../../context/action'
+import {editBook, loading} from '../../context/action'
 import Modal from '../Modal/Modal'
 function EditForm({id,hideForm}) {
     
@@ -14,6 +14,7 @@ const [totalPages,setTotalPages]=useState(book.totalPages)
 const [error,setError]=useState(null)
 const onSubmitHandler=(e)=>{
     e.preventDefault()
+    dispatch(loading(true))
     if(title.length===0|| author.length===0 )
     return setError("The fields cannot be empty")
     if(+totalPages===0){
