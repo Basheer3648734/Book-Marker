@@ -52,7 +52,7 @@ function Home() {
             
             <div className="mt-5">
         <h1 className="font-bold text-3xl text-center mb-3">Books</h1>
-        <ul>
+        <ul className='my-5'>
             {state.books.length===0?<p className="text-lg py-2 text-gray-500 text-center">No books added!</p>:null}
             {state.books.map(({id,title,author,imageURL,lastRead,totalPages})=>{
                 return (
@@ -61,7 +61,7 @@ function Home() {
             })}
         </ul>
         </div>
-        <div className="my-4 hidden md:block">
+        <div className="my-5 hidden md:block">
         <h1 className="font-bold text-3xl text-center mb-5">Add new book</h1>
         <Form/>
         </div>

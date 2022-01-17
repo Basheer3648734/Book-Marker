@@ -6,7 +6,16 @@
   height: 40vmin;
   pointer-events: none;
 }
-
+body::-webkit-scrollbar{
+  width:0.5vw;
+  background-color: #a7adb4;
+  opacity: 0.5;
+  border-radius: 20vw;
+}
+body::-webkit-scrollbar-thumb{
+  background-color: #414d5a;
+  border-radius: 30px;
+}
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
