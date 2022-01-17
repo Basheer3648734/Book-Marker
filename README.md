@@ -2,7 +2,7 @@
   <img src="./public/github-banner.png" alt="banner image"/>
 </div>
 <a href="https://img.shields.io/badge/dynamic/json"></a>
-Bookmarker is a web application that lets you create book marks so that you don't have to remember how much you read. Click the 🔗to visit <a href=https://bookmarker-ba651.web.app/">Bookmarker</a>
+Bookmarker is a web application that allows you to create book-marks so that you don't have to remember how many pages you have read. Click <a href=https://bookmarker-ba651.web.app/">Bookmarker</a> 
 
 # 🚀 Technologies used
 - React
@@ -17,6 +17,9 @@ Bookmarker is a web application that lets you create book marks so that you don'
 - If PR merged, 🥳you are an contributer
   
 
+
+
+  
 # Connect
 
 <div align="center">
