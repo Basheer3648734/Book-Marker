@@ -1,5 +1,6 @@
-![image](./public/github-banner.png)
-
+<div align="center" >
+  <img src="./public/github-banner.png" alt="banner image"/>
+</div>
 <a href="https://img.shields.io/badge/dynamic/json"></a>
 Bookmarker is a web application that lets you create book marks so that you don't have to remember how much you read. Click the 🔗to visit <a href="bookmarker-ba651.web.app/" target="_blank">Bookmarker</a>
 
@@ -13,7 +14,7 @@ Bookmarker is a web application that lets you create book marks so that you don'
 - Fork the project
 - Add a feature or fix a 🐛
 - Submit a PR
-- If accepted, 🥳you are an contributer
+- If PR merged, 🥳you are an contributer
   
 
 # Connect
